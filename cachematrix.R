@@ -43,7 +43,6 @@ makeCacheMatrix <- function( m = matrix() ) {
 ## then the cacheSolve method should retrieve the inverse from the cache.
 cacheSolve <- function(mat, ...) {
 
-    ## Return a matrix that is the inverse of 'x'
     m <- mat$getInverse()
 
     ## Just return the inverse if its already set
@@ -52,13 +51,9 @@ cacheSolve <- function(mat, ...) {
             return(m)
     }
 
-    ## Get the matrix from our object
+    ## Get the matrix, calculate the inverse and cache it.
     data <- mat$getMatrix()
-
-    ## Calculate the inverse using matrix multiplication
-    m <- solve(data) %*% data
-
-    ## Set the inverse to the object
+    m <- solve(data, ...)
     mat$setInverse(m)
 
     ## Return the matrix
